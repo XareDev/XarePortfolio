@@ -720,6 +720,7 @@ section {
 		height: 3em;
 		background-color: #111010;
 		border: 0.125em var(--bg-color) solid;
+		font-size: smaller;
 	}
 
 	
