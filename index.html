@@ -2,210 +2,668 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/webp" href="icon.webp">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xare Digital Odyssey</title>
     <meta name="author" content="Youcef Harmouni">
-    <meta name="description" content="Discover the power of captivating websites! As a talented frontend developer specialized in cooperation websites, I create stunning web solutions that elevate your brand online. From eye-catching designs to seamless user experiences, my portfolio showcases my expertise in crafting visually appealing and functional websites. With a passion for coding and attention to detail, I bring your business vision to life. Explore my portfolio and unlock the potential of a website that resonates with your target audience and drives growth. Let's collaborate on building a standout online presence for your business. Contact me today and let's make an impact together!">
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Discover the power of captivating websites! As a talented frontend developer specialized in cooperation websites, I create stunning web solutions that elevate your brand online.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-	<!-- Google analyse tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-T7611E0ZJW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  gtag('config', 'G-T7611E0ZJW');
-</script>
-    
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #13131a;
+            --bg-card: #1a1a24;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .mobile-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .mobile-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15), transparent);
+            top: -200px;
+            right: -200px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-30px, 30px); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 50px;
+            color: var(--accent-light);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-name {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--accent);
+            color: white;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 2rem;
+            background: var(--bg-secondary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, rgba(99, 102, 241, 0.5), transparent);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(129, 140, 248, 0.1));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .about-text h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .tech-item {
+            padding: 0.75rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--accent);
+            color: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 6rem 2rem;
+        }
+
+        .project-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 6rem;
+            align-items: center;
+        }
+
+        .project-card:nth-child(even) {
+            direction: rtl;
+        }
+
+        .project-card:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(129, 140, 248, 0.1));
+            border-radius: 16px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        .project-info h4 {
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-description {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .project-tech span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .project-link:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Other Projects */
+        .other-projects {
+            padding: 6rem 2rem;
+            background: var(--bg-secondary);
+        }
+
+        .other-projects h3 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .other-projects h4 {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-item {
+            background: var(--bg-card);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            height: 250px;
+            transition: all 0.3s ease;
+        }
+
+        .project-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+        }
+
+        /* Social Links */
+        .social-links {
+            position: fixed;
+            left: 2rem;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .social-links::after {
+            content: '';
+            width: 2px;
+            height: 100px;
+            background: var(--text-muted);
+        }
+
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                background: var(--bg-card);
+                flex-direction: column;
+                padding: 6rem 2rem;
+                transition: right 0.3s ease;
+                border-left: 1px solid rgba(99, 102, 241, 0.2);
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            .about-content,
+            .project-card {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .social-links {
+                left: auto;
+                right: 2rem;
+                bottom: 2rem;
+                flex-direction: row;
+            }
+
+            .social-links::after {
+                width: 100px;
+                height: 2px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        
-        <img src="logo.webp" alt="" id="logo" >
-        <button class="mobile-nav-toggle" data-expanded="false">
-            <span class="sr-only">Menu</span>
-		</button>
-        <nav data-visible="false">
-            
-            <ul class="nav_links">
-
-				<li>
-					<a class="nav_items" href="#main-section">Main Page</a>
-				</li>
-
-				<li>
-					<a class="nav_items" href="#about-me-sec">About Me</a>
-				</li>
-
-				<li>
-					<a class="nav_items" href="#project-sect">Experience & Projects</a>
-				</li>
-
-			</ul>
-        </nav>
-        
+        <div class="header-content">
+            <div class="logo">XH</div>
+            <nav id="nav">
+                <a href="#hero" class="nav-link">Main Page</a>
+                <a href="#about" class="nav-link">About Me</a>
+                <a href="#projects" class="nav-link">Experience & Projects</a>
+            </nav>
+            <div class="mobile-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </header>
-    <div id="socials-container">
-        <img src="github.webp" alt="" class="social-img">
-        <img src="insta.webp" alt="" class="social-img">
-        <img src="twitter.webp" alt="" class="social-img">
-        <img src="linkedin.webp" alt="" class="social-img">
+
+    <div class="social-links">
+        <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+        <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
     </div>
-    <main>
-        <section id="main-section">
 
-            <div id="intro">
-                <div id="greeting-container">
-                    <img src="logo_512.webp" alt="" id="greeting-logo">
-                    <div id="greeting-text">
-                        <h1>Greetings , <br>
-                          <span>
-                            Youcef Harmouni
-                          </span> Here!
-                        </h1>
-                        <p>
-                            Unleash the potential of your web presence with Youcef, a versatile Frontend developer. From captivating designs to seamless functionality, let's create a digital experience that leaves a lasting impression !
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Frontend Developer</div>
+            <h1>Greetings,<br><span class="hero-name">Youcef Harmouni</span> Here!</h1>
+            <p>Unleash the potential of your web presence with Youcef, a versatile Frontend developer. From captivating designs to seamless functionality, let's create a digital experience that leaves a lasting impression!</p>
+            <button class="cta-button" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">Explore Now</button>
+        </div>
+    </section>
 
-                        </p>
-                    </div>
-                </div>
-                <div id="btn-container">
-                    <button>
-                        Explore Now
-                    </button>
-                </div>
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">01.</span>
+                <h2 class="section-title">About me</h2>
+                <div class="section-line"></div>
             </div>
-
-        </section>
-
-        <section id="about-me-sec">
-            <div id="about-me-container">
-                <img src="programming.webp" alt="">
-                <div id="about-me-text">
-                    <h3>01. About me</h3>
-                    <h2>I’m a Frontend developer.</h2>
-                    <p>Hey there! My name is Youcef, and I'm a 17-year-old Algerian Frontend developer residing in Hassi Messoued. My journey into the world of development began in 2019 when I discovered my interest in Python. However, in 2021, I shifted my focus towards web development, and it has become my true passion.
-                    Over time, I have gained valuable experience in building impressive web applications, leveraging both my passion for development and my previously mentioned hobbies. As a freelancer, I have been able to create visually appealing and well-designed web applications. Some of my notable projects include an educational website, an anime streaming site, a local business site, and much more.
-                    <br> Here are a few of the technologies I have been working with recently:</p>
-                    <div id="ul-container">
-
-                        <ul>
-                            <li>Javascript</li>
-                            <li>Sass</li>
-                            <li>Tailwind</li>
-                        </ul>
-
-                        <ul>
-                            <li>Svelte</li>
-                            <li>Phoenix</li>
-                            <li>React</li>
-                        </ul>
-
-                        <ul>
-                            <li>NextJs</li>
-                            <li>VueJs</li>
-                            <li>NuxtJs</li>
-                        </ul>
-
+            <div class="about-content">
+                <div class="about-image">💻</div>
+                <div class="about-text">
+                    <h3>I'm a Frontend developer.</h3>
+                    <p>Hey there! My name is Youcef, and I'm a 17-year-old Algerian Frontend developer residing in Hassi Messoued. My journey into the world of development began in 2019 when I discovered my interest in Python. However, in 2021, I shifted my focus towards web development, and it has become my true passion.</p>
+                    <p>Over time, I have gained valuable experience in building impressive web applications, leveraging both my passion for development and my previously mentioned hobbies. As a freelancer, I have been able to create visually appealing and well-designed web applications. Some of my notable projects include an educational website, an anime streaming site, a local business site, and much more.</p>
+                    <p><strong>Here are a few of the technologies I have been working with recently:</strong></p>
+                    <div class="tech-grid">
+                        <div class="tech-item">Javascript</div>
+                        <div class="tech-item">Sass</div>
+                        <div class="tech-item">Tailwind</div>
+                        <div class="tech-item">Svelte</div>
+                        <div class="tech-item">Phoenix</div>
+                        <div class="tech-item">React</div>
+                        <div class="tech-item">NextJs</div>
+                        <div class="tech-item">VueJs</div>
+                        <div class="tech-item">NuxtJs</div>
                     </div>
                 </div>
             </div>
-            
-        </section>
-        <section id="project-sect">
-            <h2 id="project-title">
-                02. Projects & Experience
-            </h2>
+        </div>
+    </section>
 
-            <div class="project-containers">
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">02.</span>
+                <h2 class="section-title">Projects & Experience</h2>
+                <div class="section-line"></div>
+            </div>
 
-                <div class="project-details">
+            <div class="project-card">
+                <div class="project-image">
+                    <div style="width:100%;height:100%;background:linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(129, 140, 248, 0.2));display:flex;align-items:center;justify-content:center;font-size:3rem;">📚</div>
+                </div>
+                <div class="project-info">
                     <h4>Project #00</h4>
                     <h3>Molakhasat</h3>
                     <div class="project-description">
                         "Molakhasat" is my proud creation, an Algerian website solely dedicated to summaries. With over 300+ summaries encompassing all academic years, it serves as a valuable resource for fellow Algerian high school students. I programmed and launched this website in December 2021, driven by my passion for helping students navigate their secondary education journey.
                     </div>
-                    <ul>
-                        <li>HTML</li>
-                        <li>CSS</li>
-                        <li>JAVASCRIPT</li>
-                    </ul>
-                    <button class="project-preview">
-                        <img src="github.webp" alt="">
-                        <a href="https://molakhasat.netlify.app/">Learn More</a>
-                    </button>
+                    <div class="project-tech">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JAVASCRIPT</span>
+                    </div>
+                    <a href="https://molakhasat.netlify.app/" class="project-link" target="_blank">
+                        Learn More →
+                    </a>
                 </div>
-                <div class="project-img" id="proj-1"></div>
-
             </div>
 
-            <div class="project-containers even-project-container">
-
-                <div class="project-details even-project-details">
+            <div class="project-card">
+                <div class="project-image">
+                    <div style="width:100%;height:100%;background:linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(129, 140, 248, 0.2));display:flex;align-items:center;justify-content:center;font-size:3rem;">🎓</div>
+                </div>
+                <div class="project-info">
                     <h4>Project #01</h4>
                     <h3>El-Miftah School</h3>
                     <div class="project-description">
                         El-Miftah School, a newly established private school offering courses and private lessons to middle and high school students, approached me with the aim of transitioning into the digital realm. With their desire to embrace digital platforms, they sought my assistance.
                     </div>
-                    <ul>
-                        <li>HTML</li>
-                        <li>CSS</li>
-                        <li>JAVASCRIPT</li>
-                    </ul>
-                    <button class="project-preview">
-                        <img src="github.webp" alt="">
-                        <a href="https://xaredev.github.io/El-Miftah-School/">Learn More</a>
-                        
-                    </button>
+                    <div class="project-tech">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JAVASCRIPT</span>
+                    </div>
+                    <a href="https://xaredev.github.io/El-Miftah-School/" class="project-link" target="_blank">
+                        Learn More →
+                    </a>
                 </div>
-                <div class="project-img even-project-img" id="proj-2"></div>
-
             </div>
 
-
-            <div class="project-containers">
-
-                <div class="project-details">
+            <div class="project-card">
+                <div class="project-image">
+                    <div style="width:100%;height:100%;background:linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(129, 140, 248, 0.2));display:flex;align-items:center;justify-content:center;font-size:3rem;">🎨</div>
+                </div>
+                <div class="project-info">
                     <h4>Project #02</h4>
                     <h3>Design Zine</h3>
                     <div class="project-description">
                         Design Zine, a prominent local printing company known for its exceptional design and printing work, approached me through my network to build a website that would elevate their credibility and online presence and differentiate them from competitors.
-
                     </div>
-                    <ul>
-                        <li>HTML</li>
-                        <li>CSS</li>
-                        <li>JAVASCRIPT</li>
-                    </ul>
-                    <button class="project-preview">
-                        <img src="github.webp" alt="">
-                        <a href="https://design-zine.netlify.app/index.html">Learn More</a>
-                    </button>
+                    <div class="project-tech">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JAVASCRIPT</span>
+                    </div>
+                    <a href="https://design-zine.netlify.app/index.html" class="project-link" target="_blank">
+                        Learn More →
+                    </a>
                 </div>
-                <div class="project-img" id="proj-3"></div>
-
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="other-projects-sect">
-                <h3>Other Noteworthy Projects</h3>
-                <h4>You could check more on my github page!</h4>
-                <div id="other-projects-container">
-                    <div class="project-item"></div>
-                    <div class="project-item"></div>
-                    <div class="project-item"></div>
-                    <div class="project-item"></div>
-                    <div class="project-item"></div>
-                    <div class="project-item"></div>
-                    <div class="project-item"></div>
-                    <div class="project-item"></div>
-                    <div class="project-item"></div>
-                </div>
-        </section>
-
-    </main>
-    <script src="script.js"></script>
-</body>
-</html>
+    <section class="other-projects">
+        <div class="
